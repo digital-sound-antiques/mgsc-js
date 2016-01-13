@@ -1,0 +1,3 @@
+[submodule "modules/mgsc"]
+	path = modules/mgsc
+	url = https://github.com/digital-sound-antiques/mgsc.git

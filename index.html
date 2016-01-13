@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MGSC.JS</title>
+	<script src="build/mgsc.js"></script>
+	<script src="src/main.js"></script>
+	<script>
+		function toHex(d) {
+			return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase();
+		}
+
+		function bin2txt(bin) {
+			var hexBuf = [];
+			var charBuf = [];
+			var lines = [];
+			for(var i=0;i<bin.length;i++) {
+				if(0<i && (i%16)==0) {
+					lines.push(hexBuf.join(' ') + ' |' + charBuf.join('') + '|');
+					hexBuf = [];
+					charBuf = [];
+				}
+				var code = bin[i];
+				if(0x20<=code && code<0x7F) {
+					charBuf.push(String.fromCharCode(code));
+				} else {
+					charBuf.push('.');
+				}
+				hexBuf.push(toHex(code));
+			}
+			return lines.join('\n');
+		}
+
+		function compile() {
+			var mml = document.getElementById('mml').value;
+			var result = MGSC.compile(mml);
+			document.getElementById('log').innerText = result.log + '\n' + bin2txt(result.mgs);
+		}
+	</script>
+	<style>
+		* {padding:0;margin:0;box-sizing:border-box;}
+		html,body{width:100%;height:100%;}
+		body{font-family:'Courier New';}
+		button{padding:8px;font-size:14px;}
+		pre, code, var, samp, kbd, .mono {
+			font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+			font-size: 12px;
+			line-height: 1.2;
+		}
+		textarea{border:none;font-size:12px;}		
+		#mml {padding:16px;width:100%;height:100%;background-color:#0000FF;color:white;}
+		#log {overflow:scroll;display:block;padding:16px;width:100%;height:100%;background-color:#000000;color:white;}
+	</style>
+</head>
+<body>
+	<button onclick="compile()">Compile</button>
+	<br>
+	<div style="width:100%;height:70%;">
+		<textarea id="mml">
+#opll_mode 0
+1 v10o4 cdefgab>c
+		</textarea>
+	</div>
+	<div style="width:100%;height:30%;">
+		<code id="log">
+		</code>
+	</div>
+</body>
+</html>
