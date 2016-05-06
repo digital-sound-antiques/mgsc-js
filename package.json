@@ -1,0 +1,25 @@
+{
+  "name": "mgsc-js",
+  "version": "1.0.0",
+  "description": "mgsc-js is a Javascript version of [MGSC](https://github.com/digital-sound-antiques/mgsc) (MML to MGS compiler) build with [Emuscripten](https://github.com/kripken/emscripten).",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "exports-loader": "^0.6.3",
+    "expose-loader": "^0.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digital-sound-antiques/mgsc-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/digital-sound-antiques/mgsc-js/issues"
+  },
+  "homepage": "https://github.com/digital-sound-antiques/mgsc-js#readme"
+}
