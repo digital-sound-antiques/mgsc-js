@@ -1,14 +1,13 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_C_FLAGS "-O3 -Wall")
 
 add_subdirectory(modules/mgsc)
-
 include_directories(modules/mgsc/src)
 
 if(EMSCRIPTEN)
 	set(CMAKE_LINK_FLAGS "-O3")
-	set(CMAKE_EXE_LINKER_FLAGS "--memory-init-file 0 -O3 -s EXPORTED_FUNCTIONS=\"['_MGSC_compile']\"")
+	set(CMAKE_EXE_LINKER_FLAGS "-s MODULARIZE=1 --memory-init-file 0 -O3 -s EXPORTED_FUNCTIONS=\"['_MGSC_compile']\"")
 endif()
 
 #  -s MODULARIZE=1 -s EXPORT_NAME=\"'MGSC_Module'\"

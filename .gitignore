@@ -58,3 +58,5 @@ x86/
 Win32/
 *.dir/
 build/
+lib/
+node_modules/
