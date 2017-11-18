@@ -63,3 +63,6 @@ $ npm install
 $ npm run build 
 $ npm run jsdoc # for document
 ```
+
+# API Document
+http://digital-sound-antiques.github.io/mgsc-js/
