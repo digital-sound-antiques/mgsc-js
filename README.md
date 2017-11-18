@@ -1,4 +1,5 @@
-# mgsc-js
+# mgsc-js [![npm version](https://badge.fury.io/js/mgsc-js.svg)](https://badge.fury.io/js/mgsc-js)
+<img src="https://nodei.co/npm/mgsc-js.png?downloads=true&stars=true" alt=""/>
 
 [mgsc-js] is a JavaScript version of [MGSC] (MML to MGS compiler for [MGSDRV]) build with [Emscripten]
 
