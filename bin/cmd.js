@@ -66,5 +66,5 @@ if (argv.t && result.trackInfoText != null) {
   console.log(result.trackInfoText);
 }
 
-FS.writeFileSync(output, new Buffer(result.mgs), "binary");
+FS.writeFileSync(output, new Buffer.from(result.mgs), "binary");
 console.log("Save complete: " + output);
