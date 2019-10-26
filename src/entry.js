@@ -1,7 +1,7 @@
-(function(){
-  'use strict'
-  var Module = require('./mgsc_module');
-  var Encoding = require('encoding-japanese');
+(function() {
+  "use strict";
+  var Module = require("./mgsc_module");
+  var Encoding = require("encoding-japanese");
 
   function extractBanner(raw) {
     var m = raw.match(/^((.*\n)+?)\s*\n/);
@@ -25,7 +25,7 @@
       return {
         message: m[1],
         lineNumber: Number(m[2]) + 1,
-        lineText: m[3],
+        lineText: m[3]
       };
     }
     return null;
@@ -33,7 +33,7 @@
 
   /**
    * A MGSC emulator for JavaScript. MGSC is a MML compiler for MGSDRV on MSX.
-   * 
+   *
    * @name MGSC
    * @class
    */
@@ -61,48 +61,49 @@
    * var MGSC = require('mgsc-js');
    * var result = MGSC.compile('#opll_mode 0\n#tempo 120\n9 v13@0o4cdefgab>c\n');
    */
-  MGSC.compile = function(source) {      
+  MGSC.compile = function(source) {
+    var mml = source.replace(/\s*$/, "") + "\n";
 
-    var mml = source.replace(/\s*$/,'') + "\n";
-
-    var mmlbuf = Encoding.convert(mml, { 
-        to: 'SJIS', 
-        type: 'arraybuffer',
+    var mmlbuf = Encoding.convert(mml, {
+      to: "SJIS",
+      type: "arraybuffer"
     });
 
     if (16384 * 3 < mmlbuf.length) {
-      throw new Error('MML source is too long.');
+      throw new Error("MML source is too long.");
     }
-    var inp = Module._malloc(mmlbuf.length+1);
-    Module.HEAPU8.set(mmlbuf,inp,mmlbuf.length);
-    Module.HEAPU8[inp+mmlbuf.length] = 0;
+    var inp = Module._malloc(mmlbuf.length + 1);
+    Module.HEAPU8.set(mmlbuf, inp, mmlbuf.length);
+    Module.HEAPU8[inp + mmlbuf.length] = 0;
 
     var ptr = Module._malloc(32768);
     var log = Module._malloc(32768);
-    var size = Module.ccall('MGSC_compile', 'number', ['number','number','number'], [inp,ptr,log]);
+    var size = Module.ccall("MGSC_compile", "number", ["number", "number", "number"], [inp, ptr, log]);
     var mgs = new Uint8Array(size);
-    mgs.set(new Uint8Array(Module.HEAPU8.buffer,ptr,size));     
-    var message = Module.AsciiToString(log).replace(/^\s*|\s*$/,'').replace(/\r/g,'');
+    mgs.set(new Uint8Array(Module.HEAPU8.buffer, ptr, size));
+    var message = Module.AsciiToString(log)
+      .replace(/^\s*|\s*$/, "")
+      .replace(/\r/g, "");
 
     Module._free(inp);
     Module._free(ptr);
     Module._free(log);
-    
-    return { 
-      mgs: mgs, 
-      success: (0 < mgs.length),
+
+    return {
+      mgs: mgs,
+      success: 0 < mgs.length,
       errorInfo: extractErrorInfo(message),
       bannerText: extractBanner(message),
       trackInfoText: extractTrackInfo(message),
-      rawMessage: message,
+      rawMessage: message
     };
   };
 
-  if (typeof exports === 'object') {
+  if (typeof exports === "object") {
     module.exports = MGSC;
-  } else if (typeof define === 'function' && define.amd) {
+  } else if (typeof define === "function" && define.amd) {
     define(function() {
       return MGSC;
     });
   }
-}());
+})();
