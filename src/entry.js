@@ -62,7 +62,9 @@
    * var result = MGSC.compile('#opll_mode 0\n#tempo 120\n9 v13@0o4cdefgab>c\n');
    */
   MGSC.compile = function(source) {
-    var mml = source.replace(/\s*$/, "") + "\n";
+    /* remain at least a single space because empty header exists at the last line of mml */
+    /* ex. `9\n<EOF>` is error but `9 \n<EOF>` is accepted by original MGSC.COM */
+    var mml = source.replace(/\s+$/, " ") + "\n";
 
     var mmlbuf = Encoding.convert(mml, {
       to: "SJIS",
