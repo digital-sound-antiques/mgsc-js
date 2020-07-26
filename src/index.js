@@ -42,12 +42,17 @@
   }
 
   /**
-     * A MGSC emulator for JavaScript. MGSC is a MML compiler for MGSDRV on MSX.
-     *
-     * @name MGSC
-     * @class
-     */
+   * A MGSC emulator for JavaScript. MGSC is a MML compiler for MGSDRV on MSX.
+   *
+   * @name MGSC
+   * @class
+   */
   class MGSC {
+    /**
+     * Initialize the library.
+     * This function must be called with await before using other methods of MGSC. 
+     * @returns a Promise<void>
+     */
     static async initialize() {
       if (_emscriptenModulePromise == null) {
         _emscriptenModulePromise = moduleFactory().then((m) => {
@@ -60,26 +65,26 @@
       return _emscriptenModulePromise;
     }
     /**
-       * @typedef CompilerResult
-       * @prop {Uint8Array} mgs - Compiled MGS binary. Its length is zero if the compiler fails.
-       * @prop {boolean} success - `true` if and only if there is no compilation errors.
-       * @prop {string} rawMessage - The raw output message of the compiler.
-       * @prop {string} bannerText - The banner and copyright text of the compiler.
-       * @prop {string} trackInfoText - The track memory usage corresponding to the -T option output of the original MGSC.
-       * @prop {Object} [errorInfo] - The error info. `null` if no compilation errors.
-       * @prop {string} errorInfo.message - The error message.
-       * @prop {number} errorInfo.lineNumber - The error line number.
-       * @prop {string} errorInfo.lineText - The error line text.
-       */
+     * @typedef CompilerResult
+     * @prop {Uint8Array} mgs - Compiled MGS binary. Its length is zero if the compiler fails.
+     * @prop {boolean} success - `true` if and only if there is no compilation errors.
+     * @prop {string} rawMessage - The raw output message of the compiler.
+     * @prop {string} bannerText - The banner and copyright text of the compiler.
+     * @prop {string} trackInfoText - The track memory usage corresponding to the -T option output of the original MGSC.
+     * @prop {Object} [errorInfo] - The error info. `null` if no compilation errors.
+     * @prop {string} errorInfo.message - The error message.
+     * @prop {number} errorInfo.lineNumber - The error line number.
+     * @prop {string} errorInfo.lineText - The error line text.
+     */
     /**
-       * @param {string} source - The input MML text. It must be a JavaScript string. i.e. UTF-16 encoded.
-       * @returns {CompilerResult}
-       * @static
-       * @memberof MGSC
-       * @example
-       * var MGSC = require('mgsc-js');
-       * var result = MGSC.compile('#opll_mode 0\n#tempo 120\n9 v13@0o4cdefgab>c\n');
-       */
+     * @param {string} source - The input MML text. It must be a JavaScript string. i.e. UTF-16 encoded.
+     * @returns {CompilerResult}
+     * @static
+     * @memberof MGSC
+     * @example
+     * var MGSC = require('mgsc-js');
+     * var result = MGSC.compile('#opll_mode 0\n#tempo 120\n9 v13@0o4cdefgab>c\n');
+     */
     static compile(source) {
       /* remain at least a single space because empty header exists at the last line of mml */
       /* ex. `9\n<EOF>` is error but `9 \n<EOF>` is accepted by original MGSC.COM */

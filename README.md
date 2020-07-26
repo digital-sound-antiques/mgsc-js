@@ -36,27 +36,35 @@ Usage: mgsc [options] source
 
 # Install and Use as Library
 Install the mgsc-js as a node_module.
+
 ```sh
 $ npm install --save mgsc-js
 ```
-Then,
-```javascript
-var FS = require('fs');
-var MGSC = require('mgsc-js');
-var result = MGSC.compile('#opll_mode 0\n#tempo 120\n9 v13@0o4cdefgab>c\n');
-   
-if (!result.success) {
-  console.log(result.errorInfo.message + ' in ' + result.errorInfo.lineNumber);
-  console.log('>> ' + result.errorInfo.lineText + '\n');
-  process.exit(1);
-}
 
-FS.writeFileSync('result.mgs', new Buffer(result.mgs), "binary");
+Then,
+
+```javascript
+const FS = require('fs');
+const MGSC = require('mgsc-js');
+
+MGSC.initialize().then(() => {
+  const result = MGSC.compile('#opll_mode 0\n#tempo 120\n9 v13@0o4cdefgab>c\n');    
+  if (!result.success) {
+    console.log(result.errorInfo.message + ' in ' + result.errorInfo.lineNumber);
+    console.log('>> ' + result.errorInfo.lineText + '\n');
+    process.exit(1);
+  }
+
+  FS.writeFileSync('result.mgs', new Buffer(result.mgs), "binary");
+});
 ```
 
 # How to build Project
-Prerequesties: node.js, `cmake` and `emcmake` are required to build the project.
+`emscripten >=1.39.20` and `cmake` are required.
+
 ```sh
+$ emcc -v # confirm emcc is on path and version >= 1.39.20
+...
 $ git clone --recursive https://github.com/digital-sound-antiques/mgsc-js.git
 $ cd mgsc-js
 $ npm install
