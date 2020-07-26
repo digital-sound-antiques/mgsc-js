@@ -1,6 +1,6 @@
 {
   "name": "mgsc-js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "MML to MGS compiler for MGSDRV",
   "bin": "bin/cmd.js",
   "files": [
@@ -10,7 +10,8 @@
     "README.md",
     "package.json"
   ],
-  "main": "src/entry.js",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "dependencies": {
     "encoding-japanese": "^1.0.26",
     "minimist": "^1.2.0"
