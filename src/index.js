@@ -126,9 +126,11 @@
     }
   }
 
-
   if (typeof exports === "object") {
-    module.exports = MGSC;
+    module.exports = {
+      initialize: MGSC.initialize,
+      compile: MGSC.compile,
+    };
   } else if (typeof define === "function" && define.amd) {
     define(function () {
       return MGSC;
