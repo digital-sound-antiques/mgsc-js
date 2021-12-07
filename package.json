@@ -1,6 +1,6 @@
 {
   "name": "mgsc-js",
-  "version": "1.2.0-alpha.0",
+  "version": "1.2.0",
   "description": "MML to MGS compiler for MGSDRV",
   "bin": "bin/cmd.js",
   "files": [
