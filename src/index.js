@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  const moduleFactory = require("../lib/libmgsc");
+  const moduleFactory = require("../lib/libmgsc.js");
   const Encoding = require("encoding-japanese");
   
   let _emscriptenModulePromise = null;

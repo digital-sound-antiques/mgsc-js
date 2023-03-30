@@ -60,10 +60,10 @@ MGSC.initialize().then(() => {
 ```
 
 # How to build Project
-`emscripten >=1.39.20` and `cmake` are required.
+`emscripten >=3.0.0` and `cmake >=3.0` are required.
 
 ```sh
-$ emcc -v # confirm emcc is on path and version >= 1.39.20
+$ emcc -v # confirm emcc is on path and version >= 3.0.0
 ...
 $ git clone --recursive https://github.com/digital-sound-antiques/mgsc-js.git
 $ cd mgsc-js
