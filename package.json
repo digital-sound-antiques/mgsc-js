@@ -29,7 +29,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "npm run clean && npm run build",
+    "prepublishOnly": "npm run clean && npm run build",
     "clean": "rimraf lib build",
     "build": "npm run cmake",
     "cmake": "mkdirp build && cd build && emcmake cmake .. && make && cpy libmgsc.js ../lib/",
