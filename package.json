@@ -1,39 +1,50 @@
 {
   "name": "mgsc-js",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "MML to MGS compiler for MGSDRV",
   "bin": "bin/cmd.js",
   "files": [
     "bin",
     "src",
     "lib",
+    "dist",
     "README.md",
     "package.json"
   ],
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "dist/index.js",
   "dependencies": {
-    "encoding-japanese": "^2.0.0",
-    "minimist": "^1.2.8",
-    "rimraf": "^4.4.1"
+    "command-line-args": "^5.1.1",
+    "command-line-usage": "^6.1.0",
+    "rimraf": "^4.4.1",
+    "utf16-to-sjis": "^1.0.0"
   },
   "devDependencies": {
+    "@types/command-line-args": "^5.2.0",
+    "@types/command-line-usage": "^5.0.2",
+    "@types/emscripten": "^1.39.6",
+    "@types/node": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
     "cpy-cli": "^4.2.0",
-    "eslint": "^5.0.0",
-    "eslint-config-prettier": "^6.4.0",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "ink-docstrap": "^1.3.2",
-    "jsdoc": "^3.5.5",
-    "mkdirp": "^0.5.1",
-    "prettier": "^1.18.2"
+    "mkdirp": "^2.1.5",
+    "prettier": "^2.8.7",
+    "rimraf": "^4.4.1",
+    "typedoc": "^0.23.27",
+    "typescript": "^4.9.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublishOnly": "npm run clean && npm run build",
-    "clean": "rimraf lib build",
-    "build": "npm run cmake",
-    "cmake": "mkdirp build && cd build && emcmake cmake .. && make && cpy libmgsc.js ../lib/",
-    "jsdoc": "jsdoc -c jsdoc.config.json --readme README.md"
+    "prepublishOnly": "npm run clean && npm run build:all",
+    "clean:all": "num run clean:emscripten && npm run clean",
+    "clean:emscripten": "rimraf lib build",
+    "clean": "rimraf dist",
+    "build:all": "npm run build:emscripten && npm run build tsc",
+    "build:emscripten": "mkdirp build && cd build && emcmake cmake .. && make && cpy libmgsc.js ../lib/",
+    "build": "tsc",
+    "doc": "rimraf docs/api ; typedoc"
   },
   "repository": {
     "type": "git",
@@ -45,5 +56,8 @@
   "bugs": {
     "url": "https://github.com/digital-sound-antiques/mgsc-js/issues"
   },
-  "homepage": "https://github.com/digital-sound-antiques/mgsc-js"
+  "homepage": "https://github.com/digital-sound-antiques/mgsc-js",
+  "engines": {
+    "node": ">=14.18.2"
+  }
 }

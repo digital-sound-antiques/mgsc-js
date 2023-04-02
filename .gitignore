@@ -1,6 +1,7 @@
 .DS_Store
+dist/
 build/
-lib/
+lib/libmgsc.js
 node_modules/
 
 *.mml

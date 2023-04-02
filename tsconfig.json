@@ -1,0 +1,17 @@
+{
+  "exclude": ["build", "docs", "dist", "**/__tests__/**/*"],
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "inlineSources": true,
+    "module": "commonjs",
+    "moduleResolution": "node16",
+    "noImplicitOverride": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2020"
+  }
+}
