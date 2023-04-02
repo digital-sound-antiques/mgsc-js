@@ -1,5 +1,5 @@
 {
-  "exclude": ["build", "docs", "dist", "**/__tests__/**/*"],
+  "exclude": ["bin", "build", "docs", "dist", "lib", "**/__tests__/**/*"],
   "include": ["src/**/*.ts"],
   "compilerOptions": {
     "declaration": true,

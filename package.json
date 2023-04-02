@@ -1,6 +1,6 @@
 {
   "name": "mgsc-js",
-  "version": "2.0.0",
+  "version": "2.0.0-beta.0",
   "description": "MML to MGS compiler for MGSDRV",
   "bin": "bin/cmd.js",
   "files": [
@@ -41,7 +41,7 @@
     "clean:all": "num run clean:emscripten && npm run clean",
     "clean:emscripten": "rimraf lib build",
     "clean": "rimraf dist",
-    "build:all": "npm run build:emscripten && npm run build tsc",
+    "build:all": "npm run build:emscripten && npm run build",
     "build:emscripten": "mkdirp build && cd build && emcmake cmake .. && make && cpy libmgsc.js ../lib/",
     "build": "tsc",
     "doc": "rimraf docs/api ; typedoc"
